@@ -209,6 +209,55 @@
             gap: 15px;
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            
+            /* Новые свойства для позиционирования кнопки и полноэкранного режима */
+            position: relative;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        /* Класс полноэкранного режима */
+        .viewer-fullscreen {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 100vw !important;
+            height: 100vh !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            z-index: 9999;
+        }
+
+        /* Кнопка переключения полноэкранного режима */
+        .fullscreen-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--inner-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            border-radius: 4px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 10;
+            padding: 0;
+            outline: none;
+        }
+
+        .fullscreen-btn:hover {
+            border-color: var(--accent-hover);
+            background-color: var(--item-hover-bg);
+            color: #ffffff;
+        }
+
+        /* Защита заголовка от перекрытия кнопкой (отступ справа) */
+        #tab-title {
+            padding-right: 40px;
         }
 
         /* КОНТЕНТ В СТИЛЕ HOMEBREWERY */
@@ -394,7 +443,17 @@
         </div>
     </div>
 
-    <div class="viewer">
+    <div class="viewer" id="viewer-panel">
+        
+        <button class="fullscreen-btn" title="Развернуть/Свернуть" onclick="toggleFullscreen()">
+            <svg id="icon-expand" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+            </svg>
+            <svg id="icon-collapse" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                <path d="M4 14h6v6M20 10h-6V4M14 10l7-7M10 14l-7 7"/>
+            </svg>
+        </button>
+
         <h3 id="tab-title">Раздел справочника</h3>
         <div id="txt-content">
             <div class="placeholder-text">Выберите интересующий раздел из списка слева, чтобы открыть информацию.</div>
@@ -407,6 +466,28 @@
         let categoriesData = [];
         let activeFilters = [];
         let activeCategory = 'Основа';
+
+        // Функция полноэкранного режима
+        function toggleFullscreen() {
+            const viewer = document.getElementById('viewer-panel');
+            const expandIcon = document.getElementById('icon-expand');
+            const collapseIcon = document.getElementById('icon-collapse');
+            
+            // Переключаем класс
+            viewer.classList.toggle('viewer-fullscreen');
+            
+            if (viewer.classList.contains('viewer-fullscreen')) {
+                // Включен полноэкранный: скрываем скролл на странице, меняем иконку
+                document.body.style.overflow = 'hidden';
+                expandIcon.style.display = 'none';
+                collapseIcon.style.display = 'block';
+            } else {
+                // Выключен полноэкранный: возвращаем как было
+                document.body.style.overflow = '';
+                expandIcon.style.display = 'block';
+                collapseIcon.style.display = 'none';
+            }
+        }
 
         // Функции для работы с Challenge Rating (CR)
         function parseCR(crVal) {
