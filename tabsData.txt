@@ -1,0 +1,85 @@
+[
+  { "name": "Броня, доспехи и системы защиты", "file": "base_armor.txt", "tags": ["Броня", "Таблица"], "category": "Основа", "priority": 1 },
+  { "name": "Силовые доспехи", "file": "base_power_armor.txt", "tags": ["Броня", "Таблица"], "category": "Основа", "priority": 2 },
+  { "name": "Модули силовых доспехов", "file": "base_modules.txt", "tags": ["Броня", "Таблица"], "category": "Основа", "priority": 3 },
+
+  { "name": "Огнестрельное оружие", "file": "base_firearms.txt", "tags": ["Оружие"], "category": "Основа", "priority": 1 },
+  { "name": "Арсенал", "file": "base_weapon_catalog.txt", "tags": ["Оружие", "Таблица"], "category": "Основа", "priority": 2 },
+  { "name": "Свойства оружия", "file": "base_weapon_properties.txt", "tags": ["Оружие", "Таблица"], "category": "Основа", "priority": 3 },
+
+  { "name": "Боеприпасы и гранаты", "file": "base_ammo_grenades.txt", "tags": ["Снаряжение", "Оружие", "Таблица"], "category": "Основа", "priority": 1 },
+  { "name": "Медицина, стимуляторы и наркотики", "file": "base_medicine.txt", "tags": ["Снаряжение", "Таблица"], "category": "Основа", "priority": 2 },
+  { "name": "Снаряжение и приборы", "file": "base_equipment.txt", "tags": ["Снаряжение", "Таблица"], "category": "Основа", "priority": 3 },
+
+  { "name": "Валюта и затраты на существование", "file": "base_currency_expenses.txt", "tags": ["Экономика"], "category": "Основа", "priority": 1 },
+  { "name": "Еда, напитки и постой", "file": "base_food_billet.txt", "tags": ["Экономика", "Таблица"], "category": "Основа", "priority": 2 },
+  
+
+
+  { "name": "Отверженный Подулья", "file": "background_hive_outcast.txt", "tags": ["Империум"], "category": "Предыстории", "priority": 1 },
+  { "name": "Ветеран Астра Милитарум", "file": "background_guardsman.txt", "tags": ["Империум"], "category": "Предыстории", "priority": 2 },
+  { "name": "Послушник Адептус Механикус", "file": "background_tech_adept.txt", "tags": ["Империум"], "category": "Предыстории", "priority": 3 },
+  { "name": "Аколит Инквизиции", "file": "background_inquisitorial_acolyte.txt", "tags": ["Империум"], "category": "Предыстории", "priority": 4 },
+  { "name": "Дитя Пустоты", "file": "background_voidborn.txt", "tags": ["Империум"], "category": "Предыстории", "priority": 5 },
+  { "name": "Адепт Министорума", "file": "background_ministorum_adept.txt", "tags": ["Империум"], "category": "Предыстории", "priority": 6 },
+  { "name": "Санкционированный Псайкер", "file": "background_sanctioned_psyker.txt", "tags": ["Империум"], "category": "Предыстории", "priority": 7 },
+  { "name": "Судья Адептус Арбитрес", "file": "background_adeptus_arbites.txt", "tags": ["Империум"], "category": "Предыстории", "priority": 8 },
+  
+
+
+  { "name": "Психический удар", "file": "spell_psychic_strike.txt", "tags": ["0 уровень (Заговор)", "Эфиромантия"], "category": "Заклинания", "priority": 1 },
+  { "name": "Эхо мыслей", "file": "spell_thought_echo.txt", "tags": ["0 уровень (Заговор)", "Телепатия"], "category": "Заклинания", "priority": 2 },
+  { "name": "Статический щит", "file": "spell_static_shield.txt", "tags": ["0 уровень (Заговор)", "Телекинез"], "category": "Заклинания", "priority": 3 },
+  { "name": "Психический маркер", "file": "spell_psychic_marker.txt", "tags": ["0 уровень (Заговор)", "Прорицание"], "category": "Заклинания", "priority": 4 },
+  { "name": "Перегрузка чувств", "file": "spell_sensory_overload.txt", "tags": ["0 уровень (Заговор)", "Телепатия"], "category": "Заклинания", "priority": 5 },
+  { "name": "Психический обман", "file": "spell_psychic_deception.txt", "tags": ["0 уровень (Заговор)", "Телепатия"], "category": "Заклинания", "priority": 6 },
+
+  { "name": "Сжатие плоти", "file": "spell_flesh_compression.txt", "tags": ["1 уровень", "Биомантия"], "category": "Заклинания", "priority": 1 },
+  { "name": "Взор за Грань", "file": "spell_sight_beyond_the_veil.txt", "tags": ["1 уровень", "Прорицание"], "category": "Заклинания", "priority": 2 },
+  { "name": "Психический визг", "file": "spell_psychic_scream.txt", "tags": ["1 уровень", "Телепатия"], "category": "Заклинания", "priority": 3 },
+  { "name": "Ускорение реакции", "file": "spell_reaction_acceleration.txt", "tags": ["1 уровень", "Биомантия"], "category": "Заклинания", "priority": 4 },
+  { "name": "Малый пирокинез", "file": "spell_lesser_pyrokinesis.txt", "tags": ["1 уровень", "Пирокинез"], "category": "Заклинания", "priority": 5 },
+  { "name": "Силовой заслон", "file": "spell_force_barrier.txt", "tags": ["1 уровень", "Телекинез"], "category": "Заклинания", "priority": 6 },
+  { "name": "Поток пирокинеза", "file": "spell_pyrokinesis_torrent.txt", "tags": ["1 уровень", "Пирокинез"], "category": "Заклинания", "priority": 7 },
+
+  { "name": "Купол Пустоты", "file": "spell_void_dome.txt", "tags": ["2 уровень", "Телекинез"], "category": "Заклинания", "priority": 1 },
+  { "name": "Принуждение", "file": "spell_compulsion.txt", "tags": ["2 уровень", "Телепатия"], "category": "Заклинания", "priority": 2 },
+  { "name": "Био-укрепление", "file": "spell_bio_fortification.txt", "tags": ["2 уровень", "Биомантия"], "category": "Заклинания", "priority": 3 },
+  { "name": "Телекинетический бросок", "file": "spell_telekinetic_throw.txt", "tags": ["2 уровень", "Телекинез"], "category": "Заклинания", "priority": 4 },
+  { "name": "Психический туман", "file": "spell_psychic_fog.txt", "tags": ["2 уровень", "Телепатия"], "category": "Заклинания", "priority": 5 },
+
+  { "name": "Молнии Варпа", "file": "spell_warp_lightning.txt", "tags": ["3 уровень", "Эфиромантия"], "category": "Заклинания", "priority": 1 },
+  { "name": "Регенерация псайкера", "file": "spell_psyker_regeneration.txt", "tags": ["3 уровень", "Биомантия"], "category": "Заклинания", "priority": 2 },
+  { "name": "Психическое сокрушение", "file": "spell_psychic_crush.txt", "tags": ["3 уровень", "Телекинез"], "category": "Заклинания", "priority": 3 },
+  { "name": "Иссушение разума", "file": "spell_mind_withering.txt", "tags": ["3 уровень", "Телепатия"], "category": "Заклинания", "priority": 4 },
+
+  { "name": "Железная воля", "file": "spell_iron_will.txt", "tags": ["4 уровень", "Биомантия"], "category": "Заклинания", "priority": 1 },
+  { "name": "Биомантическое ускорение", "file": "spell_biomantic_acceleration.txt", "tags": ["4 уровень", "Биомантия"], "category": "Заклинания", "priority": 2 },
+  { "name": "Пламя Осквернения", "file": "spell_flame_of_defilement.txt", "tags": ["4 уровень", "Пирокинез"], "category": "Заклинания", "priority": 3 },
+
+  { "name": "Врата Бесконечности", "file": "spell_gate_of_infinity.txt", "tags": ["5 уровень", "Эфиромантия"], "category": "Заклинания", "priority": 1 },
+  { "name": "Гематокинез", "file": "spell_hematokinesis.txt", "tags": ["5 уровень", "Биомантия"], "category": "Заклинания", "priority": 2 },
+  { "name": "Стена Эктоплазмы", "file": "spell_wall_of_ectoplasm.txt", "tags": ["5 уровень", "Эфиромантия"], "category": "Заклинания", "priority": 3 },
+
+  { "name": "Кулак Императора", "file": "spell_fist_of_the_emperor.txt", "tags": ["6 уровень", "Телекинез"], "category": "Заклинания", "priority": 1 },
+  { "name": "Ужас Имматериума", "file": "spell_terror_of_the_immaterium.txt", "tags": ["6 уровень", "Телепатия"], "category": "Заклинания", "priority": 2 },
+
+  { "name": "Кровавое кипение", "file": "spell_blood_boiling.txt", "tags": ["7 уровень", "Биомантия"], "category": "Заклинания", "priority": 1 },
+  { "name": "Психическое доминирование", "file": "spell_psychic_domination.txt", "tags": ["7 уровень", "Телепатия"], "category": "Заклинания", "priority": 2 },
+
+  { "name": "Огненный шторм Варпа", "file": "spell_warp_firestorm.txt", "tags": ["8 уровень", "Пирокинез"], "category": "Заклинания", "priority": 1 },
+  { "name": "Ускорение времени", "file": "spell_time_acceleration.txt", "tags": ["8 уровень", "Прорицание"], "category": "Заклинания", "priority": 2 },
+
+  { "name": "Разрыв Души", "file": "spell_soul_rupture.txt", "tags": ["9 уровень", "Эфиромантия"], "category": "Заклинания", "priority": 1 },
+  
+
+
+  { "name": "Человек", "file": "race_human.txt", "tags": [], "category": "Расы", "priority": 1 },
+  { "name": "Астартес", "file": "race_astartes.txt", "tags": [], "category": "Расы", "priority": 2 },
+  
+
+
+  { "name": "Культист Хаоса", "file": "bestiary_cultist.txt", "tags": ["Хаос"], "category": "Бестиарий", "challenge_rating": 0.125 },
+  { "name": "Имперский Гвардеец", "file": "bestiary_imperial_guardsman.txt", "tags": ["Империум"], "category": "Бестиарий", "challenge_rating": 0.25 },
+  { "name": "Отряд Гвардейцев", "file": "bestiary_guardsmans_squad.txt", "tags": ["Империум", "Орда"], "category": "Бестиарий", "challenge_rating": 4 }
+]

@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Warhammer & Dragons: Player's Handbook</title>
+    <style>
+        :root {
+            --bg-color: #18181b;       
+            --panel-bg: #27272a;       
+            --inner-bg: #3f3f46;       
+            --text-color: #f4f4f5;     
+            --text-muted: #d4d4d8;     
+            --accent-color: #a1a1aa;   
+            --accent-hover: #e4e4e7;   
+            --border-color: #52525b;   
+            --item-hover-bg: #52525b;  
+
+            /* Цвета оригинального стиля The Homebrewery */
+            --hb-bg: #fdfaf3;           /* Фон бумаги */
+            --hb-text: #2c251e;         /* Цвет основного текста */
+            --hb-h1-h2: #5c1d0c;        /* Бордовый для главных заголовков */
+            --hb-h3-h4: #703c15;        /* Коричневый подзаголовков */
+            --hb-hr: #9c2a10;           /* Разделительные линии */
+            --hb-table-th: #1c1814;     /* Заголовки таблиц */
+            --hb-table-stripe: #f1ebd9; /* Светло-бежевая полоса для строк */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            height: 95vh;
+        }
+
+        .sidebar {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        h2, h3 {
+            margin: 0;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* КАТЕГОРИИ */
+        .categories-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .category-btn {
+            background-color: var(--inner-bg);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .category-btn:hover {
+            border-color: var(--accent-hover);
+            background-color: var(--item-hover-bg);
+            color: #ffffff;
+        }
+
+        .category-btn.active {
+            background-color: #9c2a10;
+            color: #ffffff;
+            border-color: #e4e4e7;
+            box-shadow: 0 2px 6px rgba(156, 42, 16, 0.4);
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .search-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 2px;
+        }
+
+        .chip {
+            background-color: #52525b;
+            color: #ffffff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .chip .close-btn {
+            cursor: pointer;
+            color: #f4f4f5;
+            font-weight: bold;
+            font-size: 1.1em;
+            line-height: 1;
+        }
+
+        .chip .close-btn:hover {
+            color: #ef4444;
+        }
+
+        select, input {
+            background-color: var(--inner-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            border-radius: 4px;
+            outline: none;
+            font-size: 0.95em;
+            transition: border-color 0.2s;
+        }
+
+        select:focus, input:focus {
+            border-color: var(--accent-hover);
+        }
+
+        input::placeholder {
+            color: #a1a1aa;
+        }
+
+        .tab-list {
+            overflow-y: auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .tab-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background-color: var(--inner-bg);
+            border: 1px solid transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-item:hover {
+            border-color: var(--accent-hover);
+            background-color: var(--item-hover-bg);
+        }
+
+        .tab-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-width: 75%;
+        }
+
+        .tab-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .tag-badge {
+            font-size: 0.7em;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            line-height: 1.3;
+            background-color: #71717a;
+            color: #ffffff;
+        }
+
+        .viewer {
+            flex: 2;
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        /* КОНТЕНТ В СТИЛЕ HOMEBREWERY */
+        #txt-content {
+            flex-grow: 1;
+            background-color: var(--hb-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 25px 30px;
+            overflow-y: auto;
+            color: var(--hb-text);
+            font-family: 'Georgia', Cambria, 'Times New Roman', Times, serif;
+            font-size: 14.5px;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        #txt-content > *:first-child { margin-top: 0 !important; }
+        #txt-content h1 { font-family: 'Georgia', serif; color: var(--hb-h1-h2); font-size: 32px; font-weight: normal; margin-top: 0; margin-bottom: 5px; }
+        #txt-content h2 { font-family: 'Georgia', serif; color: var(--hb-h1-h2); font-size: 24px; font-weight: bold; margin-top: 22px; margin-bottom: 6px; text-transform: none; letter-spacing: 0; }
+        #txt-content h3 { font-family: 'Georgia', serif; color: var(--hb-h1-h2); font-size: 21px; font-weight: normal; text-transform: none; letter-spacing: 0; margin-top: 24px; margin-bottom: 8px; border-bottom: 1px solid var(--hb-hr); padding-bottom: 2px; }
+        #txt-content h4 { font-family: 'Georgia', serif; color: var(--hb-h3-h4); font-size: 16px; font-weight: bold; margin-top: 15px; margin-bottom: 5px; }
+        #txt-content p { margin-top: 0; margin-bottom: 10px; text-align: justify; }
+        
+        #txt-content blockquote {
+            background-color: #f6efe1;
+            border: 1px solid #c7bda8;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin: 15px 0;
+            padding: 10px 15px;
+            font-family: 'Georgia', serif;
+        }
+
+        #txt-content blockquote p { margin: 0 0 6px 0; }
+        #txt-content blockquote p:last-child { margin-bottom: 0; }
+
+        /* ПОДРАСЫ / СВОРАЧИВАЕМЫЕ БЛОКИ */
+        .subrace-block {
+            margin: 15px 0;
+            border: 1px solid #d4c4a8;
+            border-radius: 4px;
+            background-color: #f8f1e3;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .subrace-block summary {
+            background-color: #ede2cd;
+            padding: 10px 15px;
+            font-family: 'Georgia', serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--hb-h1-h2);
+            cursor: pointer;
+            user-select: none;
+            border-bottom: 1px solid transparent;
+            transition: background-color 0.2s;
+            outline: none;
+        }
+
+        .subrace-block summary:hover { background-color: #e4d5bb; }
+        .subrace-block[open] summary { border-bottom: 1px solid #d4c4a8; }
+        .subrace-content { padding: 15px; }
+        .subrace-content > *:first-child { margin-top: 0; }
+        .subrace-content > *:last-child { margin-bottom: 0; }
+
+        /* ТАБЛИЦЫ */
+        #txt-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-size: 13.5px;
+            color: var(--hb-text);
+        }
+
+        #txt-content th {
+            font-family: 'Georgia', serif;
+            color: var(--hb-table-th);
+            font-weight: bold;
+            font-size: 14.5px;
+            border-bottom: 1px solid #703c15;
+            padding: 6px 8px;
+            text-align: left;
+        }
+
+        #txt-content td { padding: 5px 8px; line-height: 1.4; vertical-align: top; }
+        #txt-content tbody tr:nth-child(even) { background-color: var(--hb-table-stripe); }
+
+        /* СПИСКИ */
+        #txt-content ul { margin-top: 5px; margin-bottom: 10px; padding-left: 20px; list-style-type: disc; }
+        #txt-content li { margin-bottom: 6px; text-align: justify; line-height: 1.5; }
+        #txt-content li:last-child { margin-bottom: 0; }
+        #txt-content strong { font-weight: bold; }
+        #txt-content em { font-style: italic; }
+
+        /* СТИЛИЗАЦИЯ ДЛЯ ТЕРМИНОВ С ПОДСКАЗКАМИ */
+        .term-tooltip {
+            position: relative;
+            color: #1d4ed8;
+            border-bottom: 1px dashed #1d4ed8;
+            cursor: help;
+            display: inline-block;
+        }
+
+        .term-tooltip:hover { color: #2563eb; border-bottom-color: #2563eb; }
+
+        .term-tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1e1b4b;
+            color: #f8fafc;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 12.5px;
+            font-weight: normal;
+            line-height: 1.4;
+            white-space: normal;
+            width: 220px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border: 1px solid #3b82f6;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            z-index: 999;
+        }
+
+        .term-tooltip::before {
+            content: '';
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: #3b82f6 transparent transparent transparent;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 999;
+        }
+
+        .term-tooltip:hover::after, .term-tooltip:hover::before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-2px);
+        }
+
+        .placeholder-text {
+            color: #a1a1aa;
+            text-align: center;
+            margin-top: 20%;
+            font-style: italic;
+        }
+        
+        #txt-content .placeholder-text { color: #71717a; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Справочник игрока 41k</h2>
+        
+        <div class="categories-bar" id="categories-container"></div>
+        
+        <div class="controls">
+            <div class="search-chips" id="chips-container"></div>
+            
+            <input type="text" id="search" placeholder="Поиск... Нажмите Enter чтобы зафиксировать" oninput="updateList()" onkeydown="handleSearchKeyDown(event)">
+            <select id="sort-type" onchange="updateList()">
+                <option value="smart-sort">По Тэгам и Алфавиту</option>
+                <option value="name-asc">Алфавит: А-Я</option>
+                <option value="name-desc">Алфавит: Я-А</option>
+                <option value="cr-asc">Опасность: По возрастанию</option>
+                <option value="cr-desc">Опасность: По убыванию</option>
+            </select>
+        </div>
+
+        <div class="tab-list" id="list-container">
+            <div class="placeholder-text">Загрузка архивов...</div>
+        </div>
+    </div>
+
+    <div class="viewer">
+        <h3 id="tab-title">Раздел справочника</h3>
+        <div id="txt-content">
+            <div class="placeholder-text">Выберите интересующий раздел из списка слева, чтобы открыть информацию.</div>
+        </div>
+    </div>
+
+    <script>
+        let tabsData = [];
+        let tagsData = {};
+        let categoriesData = [];
+        let activeFilters = [];
+        let activeCategory = 'Основа';
+
+        // Функции для работы с Challenge Rating (CR)
+        function parseCR(crVal) {
+            if (crVal === undefined || crVal === null) return 0;
+            if (typeof crVal === 'number') return crVal;
+            let s = String(crVal).replace(',', '.').trim();
+            if (s === '1/4') return 0.25;
+            if (s === '1/2') return 0.5;
+            if (s === '1/8') return 0.125;
+            return parseFloat(s) || 0;
+        }
+
+        function formatCR(crVal) {
+            if (crVal === undefined || crVal === null) return '0';
+            const num = parseCR(crVal);
+            if (num === 0.25) return '1/4';
+            if (num === 0.5) return '1/2';
+            if (num === 0.125) return '1/8';
+            return String(crVal).replace('.', ','); // Поддержка запятой для удобства чтения
+        }
+
+        function getCRColor(crVal) {
+            const num = parseCR(crVal);
+            if (num <= 0.5) return '#16a34a'; // Зеленый (Низкая опасность)
+            if (num <= 2) return '#ca8a04';   // Желтый 
+            if (num <= 5) return '#ea580c';   // Оранжевый 
+            if (num <= 10) return '#dc2626';  // Красный (Высокая опасность)
+            if (num <= 20) return '#991b1b';  // Темно-красный 
+            return '#4c1d95';                 // Фиолетовый (Критическая угроза)
+        }
+
+        function loadDatabase() {
+            const container = document.getElementById('list-container');
+            const cacheBuster = `?v=${new Date().getTime()}`;
+            
+            Promise.all([
+                fetch('tabsData.txt' + cacheBuster).then(res => {
+                    if (!res.ok) throw new Error('Не удалось загрузить tabsData.txt');
+                    return res.json();
+                }),
+                fetch('tagsData.txt' + cacheBuster).then(res => {
+                    if (!res.ok) throw new Error('Не удалось загрузить tagsData.txt');
+                    return res.json();
+                }),
+                fetch('categoriesData.txt' + cacheBuster).then(res => {
+                    if (!res.ok) return []; 
+                    return res.json();
+                }).catch(() => []) 
+            ])
+            .then(([tabs, tags, categories]) => {
+                tabsData = tabs;
+                tagsData = tags;
+                
+                if (categories && categories.length > 0) {
+                    categoriesData = ['Все', ...categories];
+                } else {
+                    categoriesData = ['Все', 'Основа', 'Расы', 'Классы', 'Предыстории', 'Бестиарий', 'Заклинания'];
+                }
+                
+                renderCategories();
+                updateList();
+            })
+            .catch(error => {
+                container.innerHTML = `<span style="color: #f87171; padding: 10px;">Ошибка загрузки данных:<br>${error.message}</span>`;
+            });
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('categories-container');
+            container.innerHTML = '';
+            
+            categoriesData.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = `category-btn ${cat === activeCategory ? 'active' : ''}`;
+                btn.textContent = cat;
+                
+                btn.onclick = () => {
+                    activeCategory = cat;
+                    renderCategories();
+                    updateList();
+                };
+                
+                container.appendChild(btn);
+            });
+        }
+
+        function handleSearchKeyDown(event) {
+            if (event.key === 'Enter') {
+                const input = event.target;
+                const value = input.value.trim().toLowerCase();
+                
+                if (value && !activeFilters.includes(value)) {
+                    activeFilters.push(value);
+                    input.value = ''; 
+                    renderChips();
+                    updateList();
+                }
+            }
+        }
+
+        function renderChips() {
+            const container = document.getElementById('chips-container');
+            container.innerHTML = '';
+            
+            activeFilters.forEach((filter, index) => {
+                const chip = document.createElement('div');
+                chip.className = 'chip';
+                
+                if (tagsData[filter]) {
+                    chip.style.backgroundColor = tagsData[filter].bg;
+                    chip.style.color = tagsData[filter].color;
+                    chip.style.borderColor = tagsData[filter].bg;
+                }
+                
+                chip.innerHTML = `
+                    <span>${filter}</span>
+                    <span class="close-btn" onclick="removeFilter(${index})">&times;</span>
+                `;
+                container.appendChild(chip);
+            });
+        }
+
+        function removeFilter(index) {
+            activeFilters.splice(index, 1);
+            renderChips();
+            updateList();
+        }
+
+        function updateList() {
+            const currentSearch = document.getElementById('search').value.toLowerCase().trim();
+            const sortType = document.getElementById('sort-type').value;
+            const container = document.getElementById('list-container');
+            
+            const allQueries = [...activeFilters];
+            if (currentSearch) {
+                allQueries.push(currentSearch);
+            }
+
+            let filtered = tabsData.filter(t => {
+                if (activeCategory !== 'Все') {
+                    const itemCategory = t.category || 'Основа'; 
+                    if (itemCategory !== activeCategory) return false;
+                }
+                return allQueries.every(query => {
+                    const matchesName = t.name.toLowerCase().includes(query);
+                    const matchesTags = t.tags && t.tags.some(tag => tag.toLowerCase().includes(query));
+                    return matchesName || matchesTags;
+                });
+            });
+
+            filtered.sort((a, b) => {
+                // Сортировка по CR
+                if (sortType === 'cr-asc') {
+                    const crA = a.challenge_rating !== undefined ? parseCR(a.challenge_rating) : 9999;
+                    const crB = b.challenge_rating !== undefined ? parseCR(b.challenge_rating) : 9999;
+                    if (crA !== crB) return crA - crB;
+                    return a.name.localeCompare(b.name);
+                }
+                if (sortType === 'cr-desc') {
+                    const crA = a.challenge_rating !== undefined ? parseCR(a.challenge_rating) : -9999;
+                    const crB = b.challenge_rating !== undefined ? parseCR(b.challenge_rating) : -9999;
+                    if (crA !== crB) return crB - crA;
+                    return a.name.localeCompare(b.name);
+                }
+
+                // Смарт-сортировка
+                if (sortType === 'smart-sort') {
+                    const tagA = (a.tags && a.tags[0]) ? a.tags[0].toLowerCase() : '';
+                    const tagB = (b.tags && b.tags[0]) ? b.tags[0].toLowerCase() : '';
+                    
+                    const tagCompare = tagA.localeCompare(tagB);
+                    if (tagCompare !== 0) return tagCompare;
+                    
+                    const prioA = a.priority || 0;
+                    const prioB = b.priority || 0;
+                    if (prioA !== prioB) return prioA - prioB;
+                    
+                    return a.name.localeCompare(b.name);
+                }
+                
+                // Алфавитные сортировки
+                if (sortType === 'name-asc') return a.name.localeCompare(b.name);
+                if (sortType === 'name-desc') return b.name.localeCompare(a.name);
+
+                return (b.priority || 0) - (a.priority || 0);
+            });
+
+            container.innerHTML = '';
+            
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="placeholder-text">Ничего не найдено</div>';
+                return;
+            }
+
+            let lastGroupTag = null;
+
+            filtered.forEach(tab => {
+                // Блок разделителя тэгов (скрыт в Бестиарии)
+                if (sortType === 'smart-sort' && activeCategory !== 'Бестиарий') {
+                    const currentGroupTag = (tab.tags && tab.tags[0]) ? tab.tags[0] : 'Без тэга';
+                    const currentGroupTagLower = currentGroupTag.toLowerCase();
+
+                    if (currentGroupTagLower !== lastGroupTag) {
+                        lastGroupTag = currentGroupTagLower;
+                        const tagStyle = tagsData[currentGroupTagLower] || { bg: '#52525b', color: '#ffffff' };
+
+                        const separator = document.createElement('div');
+                        separator.className = 'tag-group-separator';
+                        separator.style.cssText = `
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            margin: 12px 0 6px 0;
+                            user-select: none;
+                        `;
+                        
+                        separator.innerHTML = `
+                            <span style="
+                                font-size: 0.75em;
+                                font-weight: bold;
+                                text-transform: uppercase;
+                                letter-spacing: 1px;
+                                padding: 2px 8px;
+                                border-radius: 4px;
+                                background-color: ${tagStyle.bg};
+                                color: ${tagStyle.color};
+                                white-space: nowrap;
+                            ">${currentGroupTag}</span>
+                            <div style="
+                                flex-grow: 1;
+                                height: 1px;
+                                background-color: ${tagStyle.bg};
+                                opacity: 0.4;
+                            "></div>
+                        `;
+                        container.appendChild(separator);
+                    }
+                }
+
+                const item = document.createElement('div');
+                item.className = 'tab-item';
+                item.style.position = 'relative'; 
+                item.onclick = () => loadTabText(tab.name, tab.file);
+                
+                let tagsHtml = '';
+                if (tab.tags && tab.tags.length > 0) {
+                    tagsHtml = `<div class="tab-tags">`;
+                    tab.tags.forEach(tag => {
+                        const lowerTag = tag.toLowerCase();
+                        const customStyle = tagsData[lowerTag] 
+                            ? `style="background-color: ${tagsData[lowerTag].bg}; color: ${tagsData[lowerTag].color}; border: 1px solid ${tagsData[lowerTag].bg};"` 
+                            : '';
+                        
+                        tagsHtml += `<span class="tag-badge" ${customStyle}>${tag}</span>`;
+                    });
+                    tagsHtml += `</div>`;
+                }
+
+                // Логика отображения CR или Приоритета
+                let cornerBadge = '';
+                if (tab.challenge_rating !== undefined) {
+                    const crColor = getCRColor(tab.challenge_rating);
+                    const crDisplay = formatCR(tab.challenge_rating);
+                    cornerBadge = `
+                        <span style="
+                            position: absolute; 
+                            top: 4px; 
+                            right: 6px; 
+                            font-size: 0.7em; 
+                            font-weight: bold;
+                            color: #ffffff; 
+                            background-color: ${crColor};
+                            padding: 2px 6px;
+                            border-radius: 4px;
+                            user-select: none;
+                            box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+                        ">CR ${crDisplay}</span>
+                    `;
+                } else if (tab.priority !== undefined) {
+                    cornerBadge = `
+                        <span style="
+                            position: absolute; 
+                            top: 4px; 
+                            right: 6px; 
+                            font-size: 0.65em; 
+                            color: #71717a; 
+                            opacity: 0.5;
+                            user-select: none;
+                        ">#${tab.priority}</span>
+                    `;
+                }
+
+                item.innerHTML = `
+                    <div class="tab-info">
+                        <span>${tab.name}</span>
+                        ${tagsHtml}
+                    </div>
+                    ${cornerBadge}
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // Парсинг Markdown в HTML (как и было)
+        function parseMarkdownToHomebrewery(text) {
+            let lines = text.split('\n');
+            let resultHtml = [];
+            let inBlockquote = false;
+            let inTable = false;
+            let inList = false; 
+            let tableLines = [];
+
+            function flushTable() {
+                if (tableLines.length > 0) {
+                    resultHtml.push(renderHTMLTable(tableLines));
+                    tableLines = [];
+                    inTable = false;
+                }
+            }
+
+            function flushList() {
+                if (inList) {
+                    resultHtml.push('</ul>');
+                    inList = false;
+                }
+            }
+
+            for (let i = 0; i < lines.length; i++) {
+                let line = lines[i].trim();
+
+                if (line.toUpperCase().startsWith('[SUBRACE:')) {
+                    if (inTable) flushTable();
+                    if (inList) flushList();
+                    if (inBlockquote) { resultHtml.push('</blockquote>'); inBlockquote = false; }
+                    
+                    let title = line.substring(9, line.length - 1).trim();
+                    resultHtml.push(`<details class="subrace-block"><summary>${title}</summary><div class="subrace-content">`);
+                    continue;
+                }
+                
+                if (line.toUpperCase() === '[/SUBRACE]') {
+                    if (inTable) flushTable();
+                    if (inList) flushList();
+                    if (inBlockquote) { resultHtml.push('</blockquote>'); inBlockquote = false; }
+                    
+                    resultHtml.push(`</div></details>`);
+                    continue;
+                }
+
+                if (line === ':') {
+                    if (inTable) flushTable();
+                    if (inList) flushList();
+                    if (inBlockquote) { resultHtml.push('</blockquote>'); inBlockquote = false; }
+                    resultHtml.push('<br>');
+                    continue;
+                }
+
+                if (line.startsWith('|')) {
+                    if (inBlockquote) { resultHtml.push('</blockquote>'); inBlockquote = false; }
+                    if (inList) flushList();
+                    inTable = true;
+                    tableLines.push(line);
+                    continue;
+                } else {
+                    if (inTable) flushTable();
+                }
+
+                if (line.startsWith('**') && inList && !line.includes('**', 2)) {
+                    let lastIdx = resultHtml.length - 1;
+                    if (lastIdx >= 0 && resultHtml[lastIdx].endsWith('</li>')) {
+                        resultHtml[lastIdx] = resultHtml[lastIdx].slice(0, -5) + `<br>${line}</li>`;
+                    } else {
+                        resultHtml.push(`<p>${line}</p>`);
+                    }
+                    continue;
+                }
+
+                if (line.startsWith('* ')) {
+                    if (inBlockquote) { resultHtml.push('</blockquote>'); inBlockquote = false; }
+                    if (!inList) {
+                        resultHtml.push('<ul>');
+                        inList = true;
+                    }
+                    resultHtml.push(`<li>${line.substring(2).trim()}</li>`);
+                    continue;
+                } else {
+                    if (inList) flushList();
+                }
+
+                if (line.startsWith('>')) {
+                    if (!inBlockquote) {
+                        resultHtml.push('<blockquote>');
+                        inBlockquote = true;
+                    }
+                    line = line.substring(1).trim();
+                } else {
+                    if (inBlockquote) {
+                        resultHtml.push('</blockquote>');
+                        inBlockquote = false;
+                    }
+                }
+
+                if (line.startsWith('# ')) {
+                    resultHtml.push(`<h1>${line.substring(2)}</h1>`);
+                } else if (line.startsWith('## ')) {
+                    resultHtml.push(`<h2>${line.substring(3)}</h2>`);
+                } else if (line.startsWith('### ')) {
+                    resultHtml.push(`<h3>${line.substring(4)}</h3>`);
+                } else if (line.startsWith('#### ')) {
+                    resultHtml.push(`<h4>${line.substring(5)}</h4>`);
+                } else if (line.length > 0) {
+                    resultHtml.push(`<p>${line}</p>`);
+                }
+            }
+
+            if (inTable) flushTable();
+            if (inList) flushList();
+            if (inBlockquote) resultHtml.push('</blockquote>');
+
+            let html = resultHtml.join('\n');
+
+            html = html.replace(/\(([^)]+)\)\[([^\]]+)\]/g, '<span class="term-tooltip" data-tooltip="$2">$1</span>');
+            html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<em><strong>$1</strong></em>');
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+            return html;
+        }
+
+        function renderHTMLTable(lines) {
+            if (lines.length < 1) return '';
+            const parseRow = (row) => row.split('|').map(cell => cell.trim()).filter((c, idx, arr) => idx > 0 && idx < arr.length - 1);
+
+            let headers = parseRow(lines[0]);
+            let startIndex = 1;
+            if (lines[1] && lines[1].includes('---')) {
+                startIndex = 2;
+            }
+
+            let tableHtml = ['<table>', '<thead>', '<tr>'];
+            headers.forEach(h => { tableHtml.push(`<th>${h}</th>`); });
+            tableHtml.push('</tr>', '</thead>', '<tbody>');
+
+            for (let i = startIndex; i < lines.length; i++) {
+                let cells = parseRow(lines[i]);
+                if (cells.length === 0) continue;
+
+                tableHtml.push('<tr>');
+                for (let j = 0; j < headers.length; j++) {
+                    let cellValue = cells[j] || '';
+                    tableHtml.push(`<td>${cellValue}</td>`);
+                }
+                tableHtml.push('</tr>');
+            }
+
+            tableHtml.push('</tbody>', '</table>');
+            return tableHtml.join('\n');
+        }
+
+        function loadTabText(name, fileName) {
+            const titleElement = document.getElementById('tab-title');
+            const contentElement = document.getElementById('txt-content');
+            
+            titleElement.textContent = name;
+            contentElement.textContent = "Загрузка данных из архивов Империума...";
+
+            const cacheBuster = `?v=${new Date().getTime()}`;
+
+            fetch(`tabs/${fileName}${cacheBuster}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Не удалось найти файл в tabs/${fileName}`);
+                    }
+                    return response.text();
+                })
+                .then(text => {
+                    contentElement.innerHTML = parseMarkdownToHomebrewery(text);
+                })
+                .catch(error => {
+                    contentElement.innerHTML = `<span style="color: #f87171">Ошибка: ${error.message}<br><br>Убедитесь, что файл существует по указанному пути.</span>`;
+                });
+        }
+
+        loadDatabase();
+    </script>
+</body>
+</html>
