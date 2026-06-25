@@ -79,7 +79,7 @@
 
 
 
-  { "name": "Штурмовой десантник", "file": "class_assault_marine.txt", "tags": [], "category": "Классы", "priority": 2 },
+  { "name": "Штурмовой десантник", "file": "class_assault_marine.txt", "tags": [], "category": "Классы", "priority": 1 },
   
 
 
