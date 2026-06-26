@@ -80,6 +80,7 @@
 
 
   { "name": "Штурмовой десантник", "file": "class_assault_marine.txt", "tags": ["Астартес"], "category": "Классы", "priority": 1 },
+  { "name": "Библиарий", "file": "class_librarian.txt", "tags": ["Астартес"], "category": "Классы", "priority": 2 },
   
 
 
