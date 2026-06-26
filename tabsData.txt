@@ -10,11 +10,11 @@
   { "name": "Боеприпасы и гранаты", "file": "base_ammo_grenades.txt", "tags": ["Снаряжение", "Оружие", "Таблица"], "category": "Основа", "priority": 1 },
   { "name": "Медицина, стимуляторы и наркотики", "file": "base_medicine.txt", "tags": ["Снаряжение", "Таблица"], "category": "Основа", "priority": 2 },
   { "name": "Снаряжение и приборы", "file": "base_equipment.txt", "tags": ["Снаряжение", "Таблица"], "category": "Основа", "priority": 3 },
+  { "name": "Наборы снаряжения", "file": "base_sets.txt", "tags": ["Снаряжение", "Таблица"], "category": "Основа", "priority": 4 },
 
   { "name": "Валюта и затраты на существование", "file": "base_currency_expenses.txt", "tags": ["Экономика"], "category": "Основа", "priority": 1 },
   { "name": "Еда, напитки и постой", "file": "base_food_billet.txt", "tags": ["Экономика", "Таблица"], "category": "Основа", "priority": 2 },  
 
-  { "name": "Варп", "file": "base_warp.txt", "tags": ["Варп"], "category": "Основа", "priority": 1 },
 
 
   { "name": "Отверженный Подулья", "file": "background_hive_outcast.txt", "tags": ["Империум"], "category": "Предыстории", "priority": 1 },
