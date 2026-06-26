@@ -351,32 +351,37 @@
         /* СТИЛИЗАЦИЯ ДЛЯ ТЕРМИНОВ С ПОДСКАЗКАМИ */
         .term-tooltip {
             position: relative;
-            color: #1c40a3;
-            border-bottom: 1px dashed #1d4ed8;
+            color: #1e40af;
+            border-bottom: 1px dashed #3b82f6;
             cursor: help;
             display: inline-block;
         }
 
-        .term-tooltip:hover { color: #2563eb; border-bottom-color: #2563eb; }
+        .term-tooltip:hover { 
+            color: #2563eb; 
+            border-bottom-color: #2563eb; 
+        }
 
         .term-tooltip::after {
             content: attr(data-tooltip);
             position: absolute;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #1e1b4b;
-            color: #f8fafc;
-            padding: 6px 12px;
-            border-radius: 5px;
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 12.5px;
+            bottom: 130%;
+            /* Изменено: привязываем к левому краю слова вместо центра */
+            left: 0; 
+            transform: none; 
+            background-color: #f4f4f5;
+            color: #18181b;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 13px;
             font-weight: normal;
-            line-height: 1.4;
-            white-space: normal;
-            width: 220px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            border: 1px solid #3b82f6;
+            line-height: 1.45;
+            white-space: pre-wrap;
+            width: 280px;              /* Чуть уменьшили ширину для безопасности */
+            text-align: left;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+            border: 1px solid #d4d4d8;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.2s ease, transform 0.2s ease;
@@ -386,21 +391,22 @@
         .term-tooltip::before {
             content: '';
             position: absolute;
-            bottom: 110%;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 6px;
+            bottom: 116%;
+            /* Изменено: стрелочка теперь тоже у левого края, чуть смещена вправо */
+            left: 15px; 
+            transform: none;
+            border-width: 7px;
             border-style: solid;
-            border-color: #3b82f6 transparent transparent transparent;
+            border-color: #d4d4d8 transparent transparent transparent;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.2s ease;
+            transition: opacity 0.2s ease, transform 0.2s ease;
             z-index: 999;
         }
 
         .term-tooltip:hover::after, .term-tooltip:hover::before {
             opacity: 1;
-            transform: translateX(-50%) translateY(-2px);
+            transform: translateY(-4px); 
         }
 
         .placeholder-text {
@@ -468,23 +474,19 @@
             const expandIcon = document.getElementById('icon-expand');
             const collapseIcon = document.getElementById('icon-collapse');
             
-            // Переключаем класс
             viewer.classList.toggle('viewer-fullscreen');
             
             if (viewer.classList.contains('viewer-fullscreen')) {
-                // Включен полноэкранный: скрываем скролл на странице, меняем иконку
                 document.body.style.overflow = 'hidden';
                 expandIcon.style.display = 'none';
                 collapseIcon.style.display = 'block';
             } else {
-                // Выключен полноэкранный: возвращаем как было
                 document.body.style.overflow = '';
                 expandIcon.style.display = 'block';
                 collapseIcon.style.display = 'none';
             }
         }
 
-        // Функции для работы с Challenge Rating (CR)
         function parseCR(crVal) {
             if (crVal === undefined || crVal === null) return 0;
             if (typeof crVal === 'number') return crVal;
@@ -501,17 +503,17 @@
             if (num === 0.25) return '1/4';
             if (num === 0.5) return '1/2';
             if (num === 0.125) return '1/8';
-            return String(crVal).replace('.', ','); // Поддержка запятой для удобства чтения
+            return String(crVal).replace('.', ',');
         }
 
         function getCRColor(crVal) {
             const num = parseCR(crVal);
-            if (num <= 0.5) return '#16a34a'; // Зеленый (Низкая опасность)
-            if (num <= 2) return '#ca8a04';   // Желтый 
-            if (num <= 5) return '#ea580c';   // Оранжевый 
-            if (num <= 10) return '#dc2626';  // Красный (Высокая опасность)
-            if (num <= 20) return '#991b1b';  // Темно-красный 
-            return '#4c1d95';                 // Фиолетовый (Критическая угроза)
+            if (num <= 0.5) return '#16a34a'; 
+            if (num <= 2) return '#ca8a04';   
+            if (num <= 5) return '#ea580c';   
+            if (num <= 10) return '#dc2626';  
+            if (num <= 20) return '#991b1b';  
+            return '#4c1d95';                 
         }
 
         function loadDatabase() {
@@ -634,7 +636,6 @@
             });
 
             filtered.sort((a, b) => {
-                // Сортировка по CR
                 if (sortType === 'cr-asc') {
                     const crA = a.challenge_rating !== undefined ? parseCR(a.challenge_rating) : 9999;
                     const crB = b.challenge_rating !== undefined ? parseCR(b.challenge_rating) : 9999;
@@ -648,7 +649,6 @@
                     return a.name.localeCompare(b.name);
                 }
 
-                // Смарт-сортировка
                 if (sortType === 'smart-sort') {
                     const tagA = (a.tags && a.tags[0]) ? a.tags[0].toLowerCase() : '';
                     const tagB = (b.tags && b.tags[0]) ? b.tags[0].toLowerCase() : '';
@@ -663,7 +663,6 @@
                     return a.name.localeCompare(b.name);
                 }
                 
-                // Алфавитные сортировки
                 if (sortType === 'name-asc') return a.name.localeCompare(b.name);
                 if (sortType === 'name-desc') return b.name.localeCompare(a.name);
 
@@ -680,7 +679,6 @@
             let lastGroupTag = null;
 
             filtered.forEach(tab => {
-                // Блок разделителя тэгов (скрыт в Бестиарии)
                 if (sortType === 'smart-sort' && activeCategory !== 'Бестиарий') {
                     const currentGroupTag = (tab.tags && tab.tags[0]) ? tab.tags[0] : 'Без тэга';
                     const currentGroupTagLower = currentGroupTag.toLowerCase();
@@ -741,7 +739,6 @@
                     tagsHtml += `</div>`;
                 }
 
-                // Логика отображения CR или Приоритета
                 let cornerBadge = '';
                 if (tab.challenge_rating !== undefined) {
                     const crColor = getCRColor(tab.challenge_rating);
@@ -786,7 +783,6 @@
             });
         }
 
-        // Парсинг Markdown в HTML (как и было)
         function parseMarkdownToHomebrewery(text) {
             let lines = text.split('\n');
             let resultHtml = [];
@@ -904,7 +900,10 @@
 
             let html = resultHtml.join('\n');
 
-            html = html.replace(/\(([^)]+)\)\[([^\]]+)\]/g, '<span class="term-tooltip" data-tooltip="$2">$1</span>');
+            html = html.replace(/\(([^)]+)\)\[([^\]]+)\]/g, (match, term, tooltip) => {
+                const cleanTooltip = tooltip.replace(/\{br\}/g, '\n');
+                return `<span class="term-tooltip" data-tooltip="${cleanTooltip}">${term}</span>`;
+            });
             html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<em><strong>$1</strong></em>');
             html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
