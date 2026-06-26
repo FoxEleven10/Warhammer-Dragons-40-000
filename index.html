@@ -15,12 +15,12 @@
             --border-color: #52525b;   
             --item-hover-bg: #52525b;  
 
-            --hb-bg: #fdfaf3;
-            --hb-text: #2c251e;
-            --hb-h1-h2: #5c1d0c;
-            --hb-h3-h4: #703c15;
-            --hb-hr: #9c2a10;
-            --hb-table-th: #1c1814;
+            --hb-bg: #fdfaf3;          
+            --hb-text: #2c251e;        
+            --hb-h1-h2: #5c1d0c;       
+            --hb-h3-h4: #703c15;       
+            --hb-hr: #9c2a10;          
+            --hb-table-th: #1c1814;    
             --hb-table-stripe: #f1ebd9;
         }
 
@@ -209,13 +209,11 @@
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
             
-            /* Новые свойства для позиционирования кнопки и полноэкранного режима */
             position: relative;
             box-sizing: border-box;
             transition: all 0.3s ease;
         }
 
-        /* Класс полноэкранного режима */
         .viewer-fullscreen {
             position: fixed !important;
             top: 0;
@@ -227,7 +225,6 @@
             z-index: 9999;
         }
 
-        /* Кнопка переключения полноэкранного режима */
         .fullscreen-btn {
             position: absolute;
             top: 15px;
@@ -254,7 +251,6 @@
             color: #ffffff;
         }
 
-        /* Защита заголовка от перекрытия кнопкой (отступ справа) */
         #tab-title {
             padding-right: 40px;
         }
@@ -355,7 +351,7 @@
         /* СТИЛИЗАЦИЯ ДЛЯ ТЕРМИНОВ С ПОДСКАЗКАМИ */
         .term-tooltip {
             position: relative;
-            color: #173588;
+            color: #1c40a3;
             border-bottom: 1px dashed #1d4ed8;
             cursor: help;
             display: inline-block;
