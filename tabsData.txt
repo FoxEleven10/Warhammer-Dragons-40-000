@@ -90,5 +90,6 @@
   { "name": "Отряд Гвардейцев", "file": "bestiary_guardsmans_squad.txt", "tags": ["Империум", "Орда"], "category": "Бестиарий", "challenge_rating": 4 },
   { "name": "Орда Чумных Зомби", "file": "bestiary_plague_zombies_horde.txt", "tags": ["Хаос", "Нургл", "Орда"], "category": "Бестиарий", "challenge_rating": 4 },
   { "name": "Орда Чумных Скитальцев", "file": "bestiary_poxwalkers_horde.txt", "tags": ["Хаос", "Нургл", "Орда"], "category": "Бестиарий", "challenge_rating": 4 },
-  { "name": "Чумной Танк", "file": "bestiary_plagueburst_crawler.txt", "tags": ["Хаос", "Нургл"], "category": "Бестиарий", "challenge_rating": 10 }
+  { "name": "Чумной Танк", "file": "bestiary_plagueburst_crawler.txt", "tags": ["Хаос", "Нургл", "Техника"], "category": "Бестиарий", "challenge_rating": 10 },
+  { "name": "Отряд Культистов Нургла", "file": "bestiary_nurgle_cultists_squad.txt", "tags": ["Хаос", "Нургл", "Орда"], "category": "Бестиарий", "challenge_rating": 4 }
 ]
