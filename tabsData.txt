@@ -88,5 +88,6 @@
   { "name": "Культист Хаоса", "file": "bestiary_cultist.txt", "tags": ["Хаос"], "category": "Бестиарий", "challenge_rating": 0.125 },
   { "name": "Имперский Гвардеец", "file": "bestiary_imperial_guardsman.txt", "tags": ["Империум"], "category": "Бестиарий", "challenge_rating": 0.25 },
   { "name": "Отряд Гвардейцев", "file": "bestiary_guardsmans_squad.txt", "tags": ["Империум", "Орда"], "category": "Бестиарий", "challenge_rating": 4 },
-  { "name": "Орда Чумных Зомби", "file": "bestiary_plague_zombies_horde.txt", "tags": ["Хаос", "Нургл", "Орда"], "category": "Бестиарий", "challenge_rating": 4 }
+  { "name": "Орда Чумных Зомби", "file": "bestiary_plague_zombies_horde.txt", "tags": ["Хаос", "Нургл", "Орда"], "category": "Бестиарий", "challenge_rating": 4 },
+  { "name": "Орда Чумных Скитальцев", "file": "bestiary_poxwalkers_horde.txt", "tags": ["Хаос", "Нургл", "Орда"], "category": "Бестиарий", "challenge_rating": 4 }
 ]
