@@ -92,6 +92,6 @@
   { "name": "Чумной Танк", "file": "bestiary_plagueburst_crawler.txt", "tags": ["Хаос", "Нургл", "Техника"], "category": "Бестиарий", "challenge_rating": 10 },
   { "name": "Отряд Культистов Нургла", "file": "bestiary_nurgle_cultists_squad.txt", "tags": ["Хаос", "Нургл", "Орда"], "category": "Бестиарий", "challenge_rating": 4 },
   { "name": "Отряд Тяжелых Сервиторов", "file": "bestiary_heavy_servitors_squad.txt", "tags": ["Орда"], "category": "Бестиарий", "challenge_rating": 4 },
-  { "name": "Отряд Корпуса Смерти Крига", "file": "death_korps_of_krieg_squad.txt", "tags": ["Империум", "Орда"], "category": "Бестиарий", "challenge_rating": 4 },
-  { "name": "Отделение Гвардии Смерти", "file": "death_guard_squad.txt", "tags": ["Хаос", "Нургл", "Орда"], "category": "Бестиарий", "challenge_rating": 5 }
+  { "name": "Отряд Корпуса Смерти Крига", "file": "bestiary_death_korps_of_krieg_squad.txt", "tags": ["Империум", "Орда"], "category": "Бестиарий", "challenge_rating": 4 },
+  { "name": "Отделение Гвардии Смерти", "file": "bestiary_death_guard_squad.txt", "tags": ["Хаос", "Нургл", "Орда"], "category": "Бестиарий", "challenge_rating": 5 }
 ]
